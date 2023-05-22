@@ -2,15 +2,19 @@
 
 # Step 6. Building R by using Mamba
 mamba install -y R radian
+conda deactivate
 
 # Step 7. Run R and install required libraries
 echo """
-chooseCRANmirror(ind=53)
+chooseCRANmirror(ind=52)
 install.packages(\"BiocManager\")
-BiocManager::install(c(\"pathview\", \"DESeq2\", \"biomaRt\"), suppressUpdates=TRUE)
+BiocManager::install(c(\"pathview\", \"DESeq2\", \"biomaRt\", \"gage\", \"gageData\", \"DEXSeq\"), suppressUpdates=TRUE)
 require(\"pathview\", quietly = TRUE)
 require(\"DESeq2\", quietly = TRUE)
 require(\"biomaRt\", quietly = TRUE)
+require(\"gage\", quietly = TRUE)
+require(\"gageData\", quietly = TRUE)
+require(\"DEXSeq\", quietly = TRUE)
 q()
 """ | radian --vanilla --no-save -q
 
@@ -31,8 +35,8 @@ ls | grep rsem | parallel sudo chmod +x
 cd ../
 sudo mv RSEM-1.3.3/ /usr/local/bin/
 echo "export PATH=\"/usr/local/bin/RSEM-1.3.3\":\$PATH" >> ~/.bashrc
+
 source ~/.bashrc
 echo "Every steps are finished. Report me when there is an error."
-
 
 exit 0
