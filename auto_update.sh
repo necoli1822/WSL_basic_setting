@@ -247,5 +247,5 @@ echo ""
 echo ""
 echo "All processes are done."
 echo "Run or add the following command at the end of ~/.bashrc."
-echo 'export PATH="$(/usr/bin/find /usr/local/bin -maxdepth 2 -iname "*latest" -type l -exec realpath {} \; | paste -s -d:)":$PATH'
+echo 'export PATH="$(/usr/bin/find /usr/local/bin/ -maxdepth 3 -type d,l -regex '.+latest$\|.+bin$' -exec realpath {} \; | paste -s -d:)":$PATH'
 echo "If the tools are not running, check the directories and PATH global variable."
